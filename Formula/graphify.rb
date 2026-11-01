@@ -8,14 +8,14 @@ class Graphify < Formula
   head "https://github.com/webomage/graphify.git", branch: "beta"
 
   depends_on "rust" => :build
-  depends_on "uv" => :build
   depends_on "python@3.12"
 
   skip_clean "libexec"
 
   def install
-    system "uv", "venv", libexec, "--python", Formula["python@3.12"].opt_bin/"python3.12"
-    system "uv", "pip", "install", "--python", libexec/"bin/python", "#{buildpath}[mcp,sql]"
+    system Formula["python@3.12"].opt_bin/"python3.12", "-m", "venv", libexec
+    system libexec/"bin/pip", "install", "--upgrade", "pip", "setuptools", "wheel"
+    system libexec/"bin/pip", "install", "#{buildpath}[mcp,sql]"
     bin.install_symlink libexec/"bin/graphify"
     bin.install_symlink libexec/"bin/graphify-mcp"
   end

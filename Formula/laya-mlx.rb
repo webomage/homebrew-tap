@@ -8,15 +8,15 @@ class LayaMlx < Formula
   head "https://github.com/webomage/laya-mlx.git", branch: "beta"
 
   depends_on "rust" => :build
-  depends_on "uv" => :build
   depends_on arch: :arm64
   depends_on "python@3.12"
 
   skip_clean "libexec"
 
   def install
-    system "uv", "venv", libexec, "--python", Formula["python@3.12"].opt_bin/"python3.12"
-    system "uv", "pip", "install", "--python", libexec/"bin/python", "#{buildpath}[serve,mcp,structured]"
+    system Formula["python@3.12"].opt_bin/"python3.12", "-m", "venv", libexec
+    system libexec/"bin/pip", "install", "--upgrade", "pip", "setuptools", "wheel", "hatchling"
+    system libexec/"bin/pip", "install", "#{buildpath}[serve,mcp,structured]"
     Dir[libexec/"bin/laya-*"].each do |script|
       bin.install_symlink script
     end
