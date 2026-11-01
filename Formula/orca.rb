@@ -2,7 +2,7 @@ class Orca < Formula
   desc "Orca multi-agent IDE & CLI with ZeroClaw, OFM, deep-links & collaboration locks (w0m beta)"
   homepage "https://github.com/webomage/orca"
   url "https://github.com/webomage/orca.git", branch: "beta"
-  version "1.4.245-w0m"
+  version "1.4.214-w0m"
   license "Apache-2.0"
 
   head "https://github.com/webomage/orca.git", branch: "beta"
